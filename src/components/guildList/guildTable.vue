@@ -8,7 +8,7 @@
       </thead>
       <tbody>
         <tr v-for="(element, index) in tableInfo" :key="index">
-          <td :class="element.name" @click="clickedCharacter($event)">{{element.name}}</td>
+          <td :class="element.name" @click="clickedCharacter($event)">{{element.name}} / {{element.job}}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -82,7 +82,7 @@ export default {
 </script>
 <style>
 .guildTable{
-  width: 200px;
+  width: 250px;
   height: 300px;
   overflow: auto;
   position: fixed;
