@@ -7,7 +7,7 @@
         </v-col>
 
       </v-row>
-      <table-add-dialog style="position: fixed; top:5%; right: 5%;"/>
+      <table-add-dialog style="position: fixed; right: 5%;top: 5%;z-index: 100"/>
       <guild-list></guild-list>
       <bottomNavbar></bottomNavbar>
     </v-container>

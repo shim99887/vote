@@ -87,6 +87,6 @@ export default {
   overflow: auto;
   position: fixed;
   top:20%;
-  right:10%;
+  right:5%;
 }
 </style>

@@ -75,7 +75,7 @@
 </template>
 <style scoped>
 .navbar {
-  bottom: 5%;
+  bottom: 0%;
   position: fixed;
 }
 

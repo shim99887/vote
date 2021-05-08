@@ -3,7 +3,6 @@
     <v-dialog
         v-model="dialog"
         width="500"
-        persistent
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -11,8 +10,9 @@
             dark
             v-bind="attrs"
             v-on="on"
+
         >
-          Click Me
+          테이블 생성
         </v-btn>
       </template>
 
