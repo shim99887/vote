@@ -44,9 +44,11 @@ export default {
   methods:{
     colClick(index){
       var name = this.$store.getters.getSelected;
+      console.log(name);
+      console.log(this.tableList);
       if(name){
         axios.post(`${SERVER_URL}/party/player`, {
-            "party_no":this.tableList[index].party_no,
+            "party_no":this.tableList[index].no,
             "id":name.id,
         })
         .then(() => {
