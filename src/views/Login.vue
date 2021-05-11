@@ -59,7 +59,7 @@ export default {
   },
   methods:{
     login(){
-      axios.post(`${SERVER_URL}/user`, {
+      axios.post(`${SERVER_URL}/user/login`, {
         "id" : this.id,
         "password" : this.pwd
       })
