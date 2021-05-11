@@ -67,7 +67,7 @@ export default {
         console.log(response);
         localStorage.setItem("loginedId", response.data.id);
         localStorage.setItem("loginedRole", response.data.role);
-        location.href = "/vote";
+        location.href = "/viewParty";
       })
       .catch((error) => {
         console.log(error);
