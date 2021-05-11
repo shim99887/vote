@@ -1,65 +1,20 @@
 <template>
   <v-app>
+      <AppBar/>
     <v-container>
-      <v-row>
-        <v-col cols="4" v-for="(element, index) in titleList" :key="index" @click="colClick(index)">
-          <taskTable :class="index" :title="element" :players="playerList[index]"/>
-        </v-col>
-
-      </v-row>
-      <table-add-dialog style="position: fixed; right: 5%;top: 5%;z-index: 100"/>
-      <guild-list></guild-list>
-      <bottomNavbar></bottomNavbar>
+      <router-view/>
     </v-container>
   </v-app>
 </template>
 <script>
-// import CardList from "./components/CardList.vue";
-import guildList from "./components/guildList/guildTable"
-import bottomNavbar from "./components/Navigation/bottomNavbar";
-import tableAddDialog from "./components/Dialog/tableAddDialog";
-import taskTable from "./components/guildList/taskTable";
-import {mapGetters} from "vuex";
+import AppBar from "./components/appbar/AppBar"
 export default {
   name: "App",
   components: {
-    // CardList,
-    bottomNavbar,
-    guildList,
-    tableAddDialog,
-    taskTable,
+    AppBar,
   },
-  data(){
-    return{
-      titleList:[],
-      playerList:[],
-    }
-  },
-  methods:{
-    colClick(index){
-      var name = this.$store.getters.getSelected;
-      if(name){
-        this.playerList[index].push(name);
-        this.$store.commit('setSelected', '');
-      }
-    }
-  },
-  computed:{
-    ...mapGetters,
-    setTitle(){
-      return this.$store.getters.getTitle;
-    },
-    setTableAdd(){
-      return this.$store.getters.getTableAdd;
-    }
-  },
-  watch:{
-    setTitle(val){
-      this.titleList.push(val);
-    },
-    setTableAdd(){
-      this.playerList.push(new Array());
-    }
+  created(){
+
   }
 };
 </script>
@@ -69,7 +24,7 @@ body {
   overflow: hidden;
   height: 100%;
   width: 100%;
-  position: fixed;
+  /*position: fixed;*/
 }
 :root {
   font-size: 10px;

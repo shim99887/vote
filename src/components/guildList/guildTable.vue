@@ -3,12 +3,13 @@
     <v-simple-table class="guildTable" dark  dense>
       <thead>
         <tr style="background-color: yellow;">
-          <th style="color: black">길드원</th>
+          <th style="color: black;font-size: 20px"><span>길드원</span>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(element, index) in tableInfo" :key="index">
-          <td :class="element.name" @click="clickedCharacter($event)">{{element.name}} / {{element.job}}</td>
+          <td style="font-size: 15px" :class="element.id" @click="clickedCharacter($event)">{{element.id}} / {{element.job}}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -17,6 +18,9 @@
 <script>
 import {mapGetters} from 'vuex';
 import $ from 'jquery';
+import axios from 'axios';
+
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   data() {
@@ -28,21 +32,39 @@ export default {
     }
   },
   created() {
-    this.guild = require("@/data/guild.json");
-    this.tableInfo = this.guild;
+    axios.get(`${SERVER_URL}/user`)
+    .then(response => {
+      console.log(response);
+      this.guild = response.data;
+      this.tableInfo = this.guild;
+    })
+    .catch(error => {
+      alert(error);
+    })
   },
   methods:{
     clickedCharacter(event){
       var name = event.target.className;
       // console.log(name);
       if(this.selected == ''){
-        this.selected = name;
-        $("." + this.selected).css('background', 'chocolate');
+        for(var i=0; i<this.guild.length; i++){
+          if(name == this.guild[i].id){
+            this.selected = this.guild[i];
+            break;
+          }
+        }
+        $("." + this.selected.id).css('background', 'chocolate');
       }else{
-        $('.' + this.selected).css('background', '');
-        this.selected = name;
-        $("." + this.selected).css('background', 'chocolate');
+        $('.' + this.selected.id).css('background', '');
+        for(var j=0; j<this.guild.length; j++){
+          if(name == this.guild[j].id){
+            this.selected = this.guild[j];
+            break;
+          }
+        }
+        $("." + this.selected.id).css('background', 'chocolate');
       }
+
       this.$store.commit('setSelected', this.selected);
     }
   },
@@ -73,8 +95,8 @@ export default {
     },
     setSelected(val){
       if(!val){
-        $('.' + this.selected).css('background', '');
-        this.selected = '';
+        $('.' + this.selected.id).css('background', '');
+        this.selected = {};
       }
     }
   }
@@ -82,11 +104,11 @@ export default {
 </script>
 <style>
 .guildTable{
-  width: 250px;
+  width: 210px;
   height: 300px;
   overflow: auto;
   position: fixed;
   top:20%;
-  right:5%;
+  right:0%;
 }
 </style>

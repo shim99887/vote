@@ -46,6 +46,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   data () {
     return {
@@ -57,7 +59,12 @@ export default {
     dialogClose(){
       if(this.title){
         this.dialog = false;
-        this.$store.commit('setTitle', this.title);
+
+        axios.post(`${SERVER_URL}/party/` + this.title)
+        .then(response => {
+          console.log("파티 생성 성공", response);
+          this.$emit('partyCreateSuccess');
+        })
         this.$store.commit('setTableAdd');
       }else{
         alert('제목 입력');
